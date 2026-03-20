@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firatech Command | Live Fleet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <h2>Firatech Command</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item active" data-target="view-radar">Live Radar</li>
+                <li class="nav-item" data-target="view-telemetry">Bot Telemetry</li>
+                <li class="nav-item" data-target="view-history">Route History</li>
+                <li class="nav-item" data-target="view-settings">Settings</li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h1 id="page-title">Live Fleet Radar</h1>
+                    <p class="subtitle">System operations and monitoring</p>
+                </div>
+                <div class="live-clock" id="clock">00:00:00</div>
+            </header>
+
+            <div id="view-radar" class="app-view active-view">
+                <div class="widgets-row">
+                    <div class="widget"><h3>Total Fleet</h3><p class="data-value">4</p></div>
+                    <div class="widget active-widget"><h3>In Transit</h3><p class="data-value">2</p></div>
+                    <div class="widget warning-widget"><h3>Maintenance</h3><p class="data-value">1</p></div>
+                </div>
+                <div class="dashboard-grid">
+                    <section class="map-container">
+                        <div class="panel-header">
+                            <h3><span class="pulse-dot"></span> Active Geo-Tracking</h3>
+                        </div>
+                        <div id="map"></div>
+                    </section>
+                    <section class="data-container">
+                        <div class="panel-header"><h3>Unit Status</h3></div>
+                        <table>
+                            <thead><tr><th>Unit ID</th><th>Destination</th><th>Status</th></tr></thead>
+                            <tbody id="fleet-data"></tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+
+            <div id="view-telemetry" class="app-view">
+                <div class="widgets-row">
+                    <div class="widget">
+                        <h3>Siana-Bot-01 Battery</h3>
+                        <p class="data-value" id="battery-text" style="color: #10b981;">84.0%</p>
+                    </div>
+                    <div class="widget">
+                        <h3>Average Speed</h3>
+                        <p class="data-value">42 km/h</p>
+                    </div>
+                    <div class="widget">
+                        <h3>Network Latency</h3>
+                        <p class="data-value" id="latency-text">12 ms</p>
+                    </div>
+                </div>
+                <div class="data-container" style="margin-top: 20px;">
+                    <h3>Live Power Consumption Graph</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="batteryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-history" class="app-view">
+                <div class="data-container">
+                    <h3>Completed Deliveries (Last 24 Hrs)</h3>
+                    <table style="margin-top: 15px;">
+                        <thead><tr><th>Time</th><th>Unit</th><th>Route</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>09:15 AM</td><td>Siana-Bot-02</td><td>Ikeja -> Oshodi</td><td><span class="badge transit">Delivered</span></td></tr>
+                            <tr><td>10:30 AM</td><td>AGV-Main</td><td>Warehouse -> Loading Dock</td><td><span class="badge transit">Delivered</span></td></tr>
+                            <tr><td>11:05 AM</td><td>Cargo-TRK-X</td><td>Ikorodu Hub -> V.I.</td><td><span class="badge maintenance">Delayed</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="view-settings" class="app-view">
+                <div class="data-container" style="max-width: 600px;">
+                    <h3>System Configurations</h3>
+                    <form style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                        <div>
+                            <label style="font-weight: bold; margin-bottom: 5px; display: block;">Refresh Rate</label>
+                            <input type="number" value="2" class="form-input">
+                        </div>
+                        <button type="button" class="btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
